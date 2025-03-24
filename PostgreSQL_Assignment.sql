@@ -17,13 +17,6 @@ VALUES
   ('Refactoring', 'Martin Fowler', 50.00, 3, 1999),
   ('Database Design Principles', 'Jane Smith', 20.00, 0, 2018);
 
--- Problem 1: Select books that are out of stock
-SELECT title FROM books
-WHERE stock = 0;
-
--- Problem 2: Select the book with the highest price
-SELECT * FROM books 
-WHERE price = (SELECT MAX(price) FROM books);
 
 -- Creating the 'customers' table to store customer information
 CREATE TABLE customers (
@@ -57,6 +50,15 @@ VALUES
     (1, 2, 1, '2024-03-10'),
     (2, 1, 1, '2024-02-20'),
     (1, 3, 2, '2024-03-05');
+
+
+    -- Problem 1: Select books that are out of stock
+SELECT title FROM books
+WHERE stock = 0;
+
+-- Problem 2: Select the book with the highest price
+SELECT * FROM books 
+WHERE price = (SELECT MAX(price) FROM books);
 
 -- Problem 3: Retrieve total orders placed by each customer
 SELECT customers.name, SUM(orders.quantity) AS total_orders
