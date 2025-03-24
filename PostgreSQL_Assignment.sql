@@ -1,4 +1,4 @@
--- Active: 1742838947367@@127.0.0.1@5432@bookstore_db
+-- Active: 1742842827065@@127.0.0.1@5432@bookstore_db@public
 
 -- Creating the 'books' table 
 CREATE TABLE books(
@@ -83,23 +83,35 @@ VALUES
 SELECT name,  sum(orders.quantity) as total_orders     FROM
  orders JOIN customers ON  orders.customer_id =  customers.id
 GROUP BY name;
+-- problem 4
 
 SELECT sum(books.price * orders.quantity ) as total_revenue
  FROM orders
   JOIN books on orders.book_id=books.id;
+-- problem 5
 
 SELECT  customers.name,  sum(orders.quantity)  as orders_count  
  FROM orders JOIN customers on orders.customer_id=customers.id
 GROUP BY customers.name HAVING sum(orders.quantity  ) > 1
+-- problem 6
 
 SELECT  ROUND( avg(price),2) as avg_book_price  FROM books 
+-- problem 7
+
+
+
+SELECT * FROM books ;
+
 
 UPDATE books
 SET price =  price *1.10
 WHERE published_year <2000;
-SELECT * FROM books WHERE published_year < 2000;
+
+-- problem 8
+DELETE  FROM customers 
+WHERE id not IN ( SELECT customer_id FROM orders)
 
 SELECT * FROM customers;
-DELETE FROM customers 
-WHERE id not IN(SELECT )
+SELECT * FROM orders;
+
 
