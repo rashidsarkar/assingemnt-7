@@ -74,6 +74,10 @@ FROM orders
 JOIN books ON orders.book_id = books.id;
 
 -- Problem 5: Retrieve customers who ordered more than 1 book
+-- First, the query retrieves the total number of orders (sum of quantities) for each customer.
+-- Then, it joins the 'orders' table with the 'customers' table based on the customer ID.
+-- After that, the results are grouped by the customer's name to aggregate the order quantities.
+-- Finally, only customers who have placed more than 1 order (based on the total quantity) are included in the result.
 SELECT customers.name, SUM(orders.quantity) AS orders_count
 FROM orders
 JOIN customers ON orders.customer_id = customers.id
@@ -89,6 +93,11 @@ SET price = price * 1.10
 WHERE published_year < 2000;
 
 -- Problem 8: Delete customers who have never placed an order
+
+-- First, the query identifies customers who have not placed any orders.
+-- It uses a subquery to select distinct customer IDs from the 'orders' table.
+-- The main query deletes customers whose IDs are not found in the subquery results, meaning they have no orders.
+-- Then, these customers (without any orders) are deleted from the 'customers' table.
 DELETE FROM customers 
 WHERE id NOT IN (SELECT DISTINCT customer_id FROM orders);
 
