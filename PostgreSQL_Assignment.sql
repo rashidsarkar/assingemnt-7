@@ -22,7 +22,7 @@ VALUES
 CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
-    email VARCHAR(50),
+    email VARCHAR(50) UNIQUE,
     joined_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
@@ -32,6 +32,8 @@ VALUES
   ('Alice', 'alice@email.com', '2023-01-10'),
   ('Bob', 'bob@email.com', '2022-05-15'),
   ('Charlie', 'charlie@email.com', '2023-06-20');
+  INSERT INTO customers (name, email) 
+VALUES ('John Doe', 'john.doe@email.com');
 
 -- Creating the 'orders' table to store order records
 CREATE TABLE orders (
@@ -39,7 +41,7 @@ CREATE TABLE orders (
     customer_id INT,
     book_id INT,
     quantity INT CHECK (quantity > 0),
-    order_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
     FOREIGN KEY (book_id) REFERENCES books(id),
     FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
@@ -52,7 +54,7 @@ VALUES
     (1, 3, 2, '2024-03-05');
 
 
-    -- Problem 1: Select books that are out of stock
+-- Problem 1: Select books that are out of stock
 SELECT title FROM books
 WHERE stock = 0;
 

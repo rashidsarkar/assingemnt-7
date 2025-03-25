@@ -1,3 +1,4 @@
+
 SELECT * FROM customers;
 
 SELECT * FROM books;
